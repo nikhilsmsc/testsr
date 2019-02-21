@@ -1,0 +1,43 @@
+documentation for api server
+*******************************
+1)install nodejs
+ curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+ sudo yum install nodejs
+ sudo yum install gcc-c++ make
+
+2)install mongodb
+vim /etc/yum.repos.d/mongodb-org.repo
+copy following
+[mongodb-org-4.0]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+
+sudo yum install mongodb-org
+sudo systemctl start mongod
+sudo systemctl enable mongod
+goto mongodb console and create user and telebudb
+mongod
+use surveydb
+db.createUser(
+   {
+     user: "surveydb",
+     pwd: "surveydb321",
+     roles: [ "readWrite", "dbAdmin" ]
+   }
+)
+
+exit
+
+
+3) download the files from git using below url 
+4)unzip folder
+5) cd server
+6)npm install
+7)npm install forever
+8)forever start server.js
+9) forever list (it gives list runing nodes)
+10) forever stop pid (it will stops particular node server)
+11) forever stopall (it will stop all runing node servers)
