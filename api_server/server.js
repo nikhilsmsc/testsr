@@ -23,6 +23,7 @@ var app = express();
 // Set up mongoose connection
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
+mongoose.set('debug', true);
 let dev_db_url = 'mongodb://surveydb:surveydb321@localhost:27017/surveydb';
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true });

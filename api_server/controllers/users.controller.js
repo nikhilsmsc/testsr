@@ -6,21 +6,13 @@ var mongoose = require('mongoose')
 exports.test = function (req, res) {
     res.send('Greetings from the Test controller!');
 };
-exports.user_create = function (req, res,next) {
+exports.SignUp = function (req, res,next) {
 		let response;
-		Users.findOne({number: req.body.number}, function(err, user) {
+		Users.findOne({emailid: req.body.emailid}, function(err, user) {
 			if(!err) {
 				if(user) {
-		
-						user.name			=req.body.name;
-						user.emailid		= req.body.emailid;
-						user.number			= req.body.number;
-						user.devicetoken	= req.body.devicetoken;
-						user.ostype			= req.body.ostype;
-						user.deviceuid		= req.body.deviceuid;
-						user.status			=1;
-						user.updatedAt		=Date.now();
-						response = { status: true, message: "User already exist updated successfully" };
+						response = { status: true, statuscode : 0, message: "User already exist with this Email" };
+						res.json(response);
 				}else{
 	
 					user = new Users(
@@ -28,24 +20,53 @@ exports.user_create = function (req, res,next) {
 							name		: req.body.name,
 							emailid		: req.body.emailid,
 							number		: req.body.number,
-							devicetoken	: req.body.devicetoken,
-							ostype		: req.body.ostype,
-							deviceuid	: req.body.deviceuid,
+							password	: req.body.pass,
 							status		:1,
 							createdAt	:Date.now()
 						}
 					);
-					response = { status: true, message: "User Created successfully"};
-				}
-				user.save(function (err,result) {
+					user.save(function (err,result) {
 					if (err) {
 						response = { status: false, message: err.message};
 						res.json(response);
 						//return next(err);
 					}
+					if(result._id){
+					response = { status: true, statuscode : 1, message: "User Created successfully"};
 					response.id= result._id; 
 					res.json(response);
+					}else{
+						response = { status: false, message: 'Got error'};
+						res.json(response);
+					}
 				});
+					
+				}
+				
+			}
+	});
+		
+};
+exports.Login = function (req, res,next) {
+		let response;
+		Users.findOne({emailid: req.body.emailid}, function(err, user) {
+			
+			if(!err) {
+				if(user) {
+						if(user.password == req.body.pass){
+							response = { status: true, message: "Login successfully" };
+
+						}else{
+							response = { status: true, statuscode : 0 , message: "password Incorrect" };
+						}
+				}else{
+	
+					response = { status: true,statuscode : 1, message: "User Not exist"};
+				}
+				res.json(response);
+			}else{
+				response = { status: false, message: err.message};
+				res.json(response);
 			}
 	});
 		
