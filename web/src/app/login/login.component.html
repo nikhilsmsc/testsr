@@ -1,4 +1,5 @@
-<div class="authentication">
+<app-header></app-header>
+ <div class="authentication">
   <div class="sign-in-2">
       <div class="container-fluid no-pdd-horizon bg" style="background-image: url('assets/images/others/img-30.jpg')">
           <div class="row">
@@ -20,7 +21,7 @@
                                                       <input type="email" class="form-control" placeholder="User name" [formControl]="loginForm.controls['email']">
                                                   </div>
                                                   <div class="form-group">
-                                                      <input type="password" class="form-control" placeholder="Password" [formControl]="loginForm.controls['password']">
+                                                      <input type="password" class="form-control" placeholder="Password" [formControl]="loginForm.controls['pass']">
                                                   </div>
                                                   <div class="checkbox font-size-13 inline-block no-mrg-vertical no-pdd-vertical">
                                                       <input id="agreement" name="agreement" type="checkbox">
