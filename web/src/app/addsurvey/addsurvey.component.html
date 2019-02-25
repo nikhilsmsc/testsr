@@ -1,0 +1,39 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-heading border bottom">
+                <h4 class="card-title">Form Validation Layout</h4>
+            </div>
+            <div class="card-block">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-8 ml-auto mr-auto">
+                            <form  [formGroup]="surveyForm" (ngSubmit)="submitForm(surveyForm.value)">
+                               
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Survey Name <small class="text-normal">*Minimum 8 characters</small></label>
+                                            <input type="text" class="form-control" placeholder="Enter your name" required minlength="8" [formControl]="surveyForm.controls['surveyname']">
+                                        </div>
+                                    </div>
+
+                                <div formArrayName="questions" *ngFor="let item of surveyForm.get('questions').controls; let i = index;">
+                                  <div [formGroup]="i">
+                                    <input formControlName="qtype" placeholder="Item name" >
+                                    <input formControlName="qt" placeholder="Item description" >
+                                    <input formControlName="answer" placeholder="Item price" >
+                                  </div>
+
+                                  Chosen name: {{ surveyForm.controls.questions.controls[i].controls.qtype.value }}
+                                </div>
+                                <button class="btn btn-primary">Submit</button>
+                                <button class="btn btn-default">Clear</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
