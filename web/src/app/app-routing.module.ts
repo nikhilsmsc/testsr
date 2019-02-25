@@ -7,6 +7,9 @@ const routes: Routes = [
 		path: 'home', loadChildren: './dashboard/dashboard.module#DashboardModule',
 	},
 	{
+		path: 'add', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
+	},
+	{
 		path: 'login', component: LoginComponent
 	},
   {

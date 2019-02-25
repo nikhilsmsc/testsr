@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GlobalMethods } from '../services/global_methods';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,10 +11,16 @@ import { HeaderComponent } from '../header/header.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   exports:[
     HttpClientModule,
-    HeaderComponent
+    HeaderComponent,
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   providers: [GlobalMethods]
 })
