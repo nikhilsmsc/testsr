@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let branches= new Schema({
 	name		: {type : String },
-	location 	: {type : String, unique:true }
+	location 	: {type : String }
 });
 let UsersSchema = new Schema({
     name		: {type: String, required: true, max: 100},

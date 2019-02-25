@@ -30,17 +30,19 @@ exports.SignUp = function (req, res,next) {
 						response = { status: false, message: err.message};
 						res.json(response);
 						//return next(err);
-					}
+					}else{
 					if(result._id){
 					response = { status: true, statuscode : 1, message: "User Created successfully"};
 					response.id= result._id; 
 					res.json(response);
 					}else{
+					
 						response = { status: false, message: 'Got error'};
 						res.json(response);
 					}
+				}
 				});
-					
+				
 				}
 				
 			}

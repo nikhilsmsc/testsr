@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -7,31 +6,37 @@
             </div>
             <div class="card-block">
                 <div class="card-block">
-                    <div class="row">
-                        <div class="col-md-8 ml-auto mr-auto">
-                            <form  [formGroup]="surveyForm" (ngSubmit)="submitForm(surveyForm.value)">
-                               
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Survey Name <small class="text-normal">*Minimum 8 characters</small></label>
-                                            <input type="text" class="form-control" placeholder="Enter your name" required minlength="8" [formControl]="surveyForm.controls['surveyname']">
-                                        </div>
-                                    </div>
-
-                                <div formArrayName="questions" *ngFor="let item of surveyForm.get('questions').controls; let i = index;">
-                                  <div [formGroup]="i">
-                                    <input formControlName="qtype" placeholder="Item name" >
-                                    <input formControlName="qt" placeholder="Item description" >
-                                    <input formControlName="answer" placeholder="Item price" >
-                                  </div>
-
-                                  Chosen name: {{ surveyForm.controls.questions.controls[i].controls.qtype.value }}
-                                </div>
-                                <button class="btn btn-primary">Submit</button>
-                                <button class="btn btn-default">Clear</button>
-                            </form>
+                    
+                    <form [formGroup]="myForm">
+                        <h3>Survey Details</h3>
+                        <label>Survey name: </label>
+                            <input formControlName="name" />
+                            <button (click)="addNewCompany()">Add Question</button><br><br>
+                        <div formArrayName="questions">
+                        <div *ngFor="let comp of myForm.get('questions').controls; let i=index">
+                        <fieldset>
+                            <legend><h3>Question {{i+1}}: </h3></legend>
+                            <div [formGroupName]="i">
+                            <label>Question type: </label>
+                            <select   formControlName="qtype">
+                                    <option *ngFor="let qtypname of qtypes">
+                                    {{qtypname}}
+                                    </option>
+                            </select>
+                            <label>Question: </label>
+                            <input formControlName="qt" /> 
+                            <label>Answer: </label>
+                            <input formControlName="ans" /> 
+                            <button (click)="deleteCompany(i)">Delete Question</button>
+                            
+                            </div>
+                        </fieldset>
                         </div>
-                    </div>
+                        </div><br>
+                        
+                    </form>
+
+                    <pre>{{myForm.value | json}}</pre>
                 </div>
             </div>
         </div>

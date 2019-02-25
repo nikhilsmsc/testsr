@@ -37,7 +37,11 @@ var server = http.createServer(app);
 
 //Routes
 const users_route = require('./routes/users.route'); // Imports routes
+const cusers_route = require('./routes/cusers.route'); // Imports routes
+const survey_route = require('./routes/survey.route'); // Imports routes
 app.use('/users', users_route);
+app.use('/survey', survey_route);
+app.use('/cusers', cusers_route);
 
 //Models
 const UsersModel = require('./models/users.model');

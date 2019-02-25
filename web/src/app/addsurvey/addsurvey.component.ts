@@ -7,28 +7,69 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
   styleUrls: ['./addsurvey.component.css']
 })
 export class AddsurveyComponent implements OnInit {
-  surveyForm: FormGroup;
-  questions: FormArray;
-  constructor(private formBuilder: FormBuilder) { }
-  createItem(): FormGroup {
-    return this.formBuilder.group({
-      'qtype':'',
-      'qt': '',
-      'answer': '',
-    });
+  data = {
+    "companies": [
+      {
+        "company": "yfjfyhj",
+        "projects": [
+          {
+            "projectName": "ghjnh"
+          },
+          {
+            "projectName": "ghnh"
+          }
+        ]
+      },
+      {
+        "company": "ghjnhfbvn",
+        "projects": [
+          {
+            "projectName": "vnfvhbnvc"
+          },
+          {
+            "projectName": "fvbnfc "
+          },
+          {
+            "projectName": "fvnvbn"
+          },
+          {
+            "projectName": "vbnvcb"
+          }
+        ]
+      }
+    ]
   }
+  qtypes :any =['Multiple Choice','Check Boxes','Short Text','Long Text Area','Date','Time','Date and Time','Drop Down','Linear Scale','Rating Grid','Strongly Agree','Strongly Disagree'];
+  myForm: FormGroup;
+  constructor(private fb: FormBuilder) { 
+    this.myForm = this.fb.group({
+      name:'',
+      questions: this.fb.array([])
+    })
+    //this.setCompanies();
+  }
+  
   ngOnInit() {
-    this.surveyForm = this.formBuilder.group({
-      'surveyname': '',
-      'questions': this.formBuilder.array([ this.createItem() ])
-    });
+
   }
-  addItem(): void {
-    this.questions = this.surveyForm.get('questions') as FormArray;
-    this.questions.push(this.createItem());
+  addNewCompany() {
+    let control = <FormArray>this.myForm.controls.questions;
+    control.push(
+      this.fb.group({
+        qtype: [''],
+        qt: [''],
+        ans: [''],
+      })
+    )
   }
-  submitForm(data :any){
-    console.log(data);
+
+  deleteCompany(index) {
+    let control = <FormArray>this.myForm.controls.questions;
+    control.removeAt(index)
   }
+
+ 
+
+
 
 }
