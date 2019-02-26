@@ -13,14 +13,14 @@
                             <input formControlName="name" />
                             <button (click)="addNewCompany()">Add Question</button><br><br>
                         <div formArrayName="questions">
-                        <div *ngFor="let comp of myForm.get('questions').controls; let i=index">
+                        <div *ngFor="let comp of myForm.get('questions')['controls']; let i=index">
                         <fieldset>
                             <legend><h3>Question {{i+1}}: </h3></legend>
                             <div [formGroupName]="i">
                             <label>Question type: </label>
                             <select   formControlName="qtype">
                                     <option *ngFor="let qtypname of qtypes">
-                                    {{qtypname}}
+                                        {{qtypname}}
                                     </option>
                             </select>
                             <label>Question: </label>
