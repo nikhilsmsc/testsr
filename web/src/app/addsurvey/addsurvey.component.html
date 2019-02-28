@@ -13,20 +13,33 @@
                             <input formControlName="name" />
                             <button (click)="addNewCompany()">Add Question</button><br><br>
                         <div formArrayName="questions">
-                        <div *ngFor="let comp of myForm.get('questions')['controls']; let i=index">
+                        <div *ngFor="let comp of myForm.get('questions')['controls']; let i=index">  
                         <fieldset>
                             <legend><h3>Question {{i+1}}: </h3></legend>
                             <div [formGroupName]="i">
                             <label>Question type: </label>
+                           
                             <select   formControlName="qtype">
                                     <option *ngFor="let qtypname of qtypes">
                                         {{qtypname}}
                                     </option>
-                            </select>
-                            <label>Question: </label>
-                            <input formControlName="qt" /> 
-                            <label>Answer: </label>
-                            <input formControlName="ans" /> 
+                                </select>
+                            <div *ngIf="comp.value.qtype=='Multiple Choice' || comp.value.qtype=='Check Boxes' || comp.value.qtype=='Drop Down' || comp.value.qtype=='Rating Grid'">
+                            <div formArrayName="options">
+                                    <div *ngFor="let option of comp.get('options').controls; let j=index">
+                                      <h4>Option {{j+1}}</h4>
+                                      <div [formGroupName]="j">
+                                        <input formControlName="option" />
+                                        <button (click)="deleteOption(comp.controls.options, j)">
+                                          Delete Option
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <button (click)="addNewOption(comp.controls.options)">
+                                      Add new Option
+                                    </button>
+                                  </div>
+                            </div>
                             <button (click)="deleteCompany(i)">Delete Question</button>
                             
                             </div>
@@ -37,6 +50,7 @@
                     </form>
 
                     <pre>{{myForm.value | json}}</pre>
+                    
                 </div>
             </div>
         </div>

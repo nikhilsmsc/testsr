@@ -39,7 +39,7 @@ export class AddsurveyComponent implements OnInit {
       }
     ]
   }
-  qtypes :any =['Multiple Choice','Check Boxes','Short Text','Long Text Area','Date','Time','Date and Time','Drop Down','Linear Scale','Rating Grid','Strongly Agree','Strongly Disagree'];
+  qtypes :any =['select','Multiple Choice','Check Boxes','Short Text','Long Text Area','Date','Time','Date and Time','Drop Down','Linear Scale','Rating Grid','Strongly Agree','Strongly Disagree'];
   myForm: FormGroup;
   constructor(private fb: FormBuilder) { 
     this.myForm = this.fb.group({
@@ -57,14 +57,23 @@ export class AddsurveyComponent implements OnInit {
     control.push(
       this.fb.group({
         qtype: [''],
-        qt: [''],
-        ans: [''],
+        options: this.fb.array([])
       })
     )
   }
 
   deleteCompany(index) {
     let control = <FormArray>this.myForm.controls.questions;
+    control.removeAt(index)
+  }
+  addNewOption(control) {
+    control.push(
+      this.fb.group({
+        option: ['']
+    }))
+  }
+  
+  deleteOption(control, index) {
     control.removeAt(index)
   }
 
