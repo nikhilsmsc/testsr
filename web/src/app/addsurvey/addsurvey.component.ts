@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
+import { GlobalMethods } from '../services/global_methods';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-addsurvey',
@@ -7,41 +10,11 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
   styleUrls: ['./addsurvey.component.css']
 })
 export class AddsurveyComponent implements OnInit {
-  data = {
-    "companies": [
-      {
-        "company": "yfjfyhj",
-        "projects": [
-          {
-            "projectName": "ghjnh"
-          },
-          {
-            "projectName": "ghnh"
-          }
-        ]
-      },
-      {
-        "company": "ghjnhfbvn",
-        "projects": [
-          {
-            "projectName": "vnfvhbnvc"
-          },
-          {
-            "projectName": "fvbnfc "
-          },
-          {
-            "projectName": "fvnvbn"
-          },
-          {
-            "projectName": "vbnvcb"
-          }
-        ]
-      }
-    ]
-  }
+
   qtypes :any =['select','Multiple Choice','Check Boxes','Short Text','Long Text Area','Date','Time','Date and Time','Drop Down','Linear Scale','Rating Grid','Strongly Agree','Strongly Disagree'];
   myForm: FormGroup;
-  constructor(private fb: FormBuilder) { 
+  res :any={};
+  constructor(private route: ActivatedRoute,private fb: FormBuilder ,private router: Router,private gbmethods : GlobalMethods) { 
     this.myForm = this.fb.group({
       name:'',
       questions: this.fb.array([])
@@ -50,19 +23,32 @@ export class AddsurveyComponent implements OnInit {
   }
   
   ngOnInit() {
-
+    console.log(this.route.snapshot.params.id);
+    if (this.route.snapshot.params.id != undefined || this.route.snapshot.params.id != "undefined") {
+      let url=this.gbmethods.getsurvey_url+this.route.snapshot.params.id;
+      this.gbmethods.getData(url).subscribe( Response => {
+         this.res=Response;
+        console.log(this.res);
+    
+      },
+      error => {
+        console.error("Error adding survey!");
+        console.error(error);
+      });
+    }
   }
-  addNewCompany() {
+  addNewQuestions() {
     let control = <FormArray>this.myForm.controls.questions;
     control.push(
       this.fb.group({
         qtype: [''],
+        question:[''],
         options: this.fb.array([])
       })
     )
   }
 
-  deleteCompany(index) {
+  deleteQuestions(index) {
     let control = <FormArray>this.myForm.controls.questions;
     control.removeAt(index)
   }
@@ -77,6 +63,22 @@ export class AddsurveyComponent implements OnInit {
     control.removeAt(index)
   }
 
+  submitForm(data : any){
+    data.cid=localStorage.getItem('user_id');
+    this.gbmethods.PostData(this.gbmethods.addsurvey_url,data).subscribe( Response => {
+      let res:any=Response;
+      console.log(res);
+     if(res.status==true){
+       
+     }else{
+       console.log(res.message);
+     }
+    },
+    error => {
+      console.error("Error adding survey!");
+      console.error(error);
+    });
+  }
  
 
 

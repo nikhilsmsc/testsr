@@ -10,6 +10,9 @@ const routes: Routes = [
 		path: 'add', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
 	},
 	{
+		path: 'edit/:id', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
+	},
+	{
 		path: 'login', component: LoginComponent
 	},
   {

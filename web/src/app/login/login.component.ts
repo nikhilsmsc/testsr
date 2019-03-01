@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup,FormBuilder  } from '@angular/forms';
 import { GlobalMethods } from '../services/global_methods';
+import { Router } from '@angular/router';
 import {Observable} from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private element: ElementRef, formbuilder: FormBuilder ,private gbmethods : GlobalMethods) { 
+  constructor(private element: ElementRef,private _location: Location,private router: Router, formbuilder: FormBuilder ,private gbmethods : GlobalMethods) { 
     this.loginForm = formbuilder.group({
       'email': "",
       'pass': ""
@@ -19,11 +21,23 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('user_id') != undefined || localStorage.getItem('user_id') != "undefined") {
+      this.router.navigateByUrl('home');
+    }
   }
   submitForm(data :any){
-    this.gbmethods.PostData(this.gbmethods.login_url,data).subscribe( data => {
-           // refresh the list
-          console.log(data);
+    this.gbmethods.PostData(this.gbmethods.login_url,data).subscribe( Response => {
+           let res:any=Response;
+           console.log(res);
+          if(res.status==true){
+            if(res.statuscode==0){
+              localStorage.setItem('user_id', res.user._id);
+              localStorage.setItem('name', res.user.name );
+              this._location.back();
+            }
+          }else{
+            console.log(res.message);
+          }
          },
          error => {
            console.error("Error saving food!");

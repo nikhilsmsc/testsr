@@ -4,9 +4,12 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class GlobalMethods {
     host_url: string = "http://localhost:3399/";
-    image_base_url: string = 'https://ugox.in/api/';
     register_url: string = this.host_url + "users/register";
     login_url: string = this.host_url + "users/login";
+    addsurvey_url: string = this.host_url + "survey/add";
+    updatesurvey_url: string = this.host_url + "survey/update";
+    getsurvey_url: string = this.host_url + "survey/";
+
    
     constructor(private http: HttpClient) {
         this.http = http;

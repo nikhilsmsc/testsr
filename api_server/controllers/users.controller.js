@@ -51,19 +51,19 @@ exports.SignUp = function (req, res,next) {
 };
 exports.Login = function (req, res,next) {
 		let response;
-		Users.findOne({emailid: req.body.emailid}, function(err, user) {
+		Users.findOne({emailid: req.body.email}, function(err, user) {
 			
 			if(!err) {
 				if(user) {
 						if(user.password == req.body.pass){
-							response = { status: true, message: "Login successfully" };
+							response = { status: true, statuscode : 0, message: "Login successfully" ,user:user };
 
 						}else{
-							response = { status: true, statuscode : 0 , message: "password Incorrect" };
+							response = { status: true, statuscode : 1 , message: "password Incorrect" };
 						}
 				}else{
 	
-					response = { status: true,statuscode : 1, message: "User Not exist"};
+					response = { status: true,statuscode : 2, message: "User Not exist"};
 				}
 				res.json(response);
 			}else{

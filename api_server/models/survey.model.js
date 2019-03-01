@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-let questions= new Schema({
+let Options=new Schema({
+	option 	: {type : String }
+});
+let Questions= new Schema({
 	qtype		: {type : String },
-	qt 			: {type : String },
-	ans			: {type : String }
+	question 	: {type : String },
+	options		: [Options] 
 });
 let SurveySchema = new Schema({
     name		: {type: String, required: true},
+	cid			: {type: String, required: true},
 	createdAt	: {type: Date},
 	updatedAt	: {type:Date},
-	questions	: [questions]
+	questions	: [Questions]
 });
 
 
