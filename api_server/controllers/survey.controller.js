@@ -33,20 +33,21 @@ exports.addSurvey = function (req, res,next) {
 };
 exports.updateSurvey = function (req, res,next) {
 	let response;
-	Survey.findOne({ "_id": mongoose.Types.ObjectId(req.body.id)}, function(err, survey) {
+	Survey.find({ "_id": mongoose.Types.ObjectId(req.body.id)}, function(err, survey) {
 			
 		if(!err) {
 			if(survey) {
 				survey.name		= req.body.name;
 				survey.updatedAt=Date.now();
 				survey.questions=req.body.questions;
-				response = { status: true, message: "survey updated successfully" };
+				
 				survey.save(function (err,result) {
 					if (err) {
 						response = { status: false, message: err.message};
 						res.json(response);
-						//return next(err);
+						return next(err);
 					}else{
+						response = { status: true, message: "survey updated successfully" };
 						response.id= result._id; 
 						res.json(response);
 					}

@@ -7,20 +7,20 @@ const routes: Routes = [
 		path: 'home', loadChildren: './dashboard/dashboard.module#DashboardModule',
 	},
 	{
+		path: 'view', loadChildren: './viewsurvey/viewsurvey.module#ViewsurveyModule',
+	},
+	{
 		path: 'add', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
 	},
 	{
-		path: 'edit/:id', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
+		path: 'edit', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
 	},
 	{
 		path: 'login', component: LoginComponent
 	},
-  {
-		path: 'login', component: LoginComponent
-	},
-	{
-		path: '**', component: LoginComponent
-	}
+	// {
+	// 	path: '**', component: LoginComponent
+	// }
 ];
 
 @NgModule({

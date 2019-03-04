@@ -51,7 +51,7 @@ exports.SignUp = function (req, res,next) {
 };
 exports.Login = function (req, res,next) {
 		let response;
-		Users.findOne({emailid: req.body.email}, function(err, user) {
+		Users.findOne({emailid: req.body.emailid}, function(err, user) {
 			
 			if(!err) {
 				if(user) {

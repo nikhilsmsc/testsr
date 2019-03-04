@@ -3,7 +3,8 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-heading border " style="margin-top: 5% ;margin-left:6% ">
-                <h4 class="card-title">Add Survey</h4>
+                <h4 class="card-title" *ngIf="!editmode">Add Survey</h4>
+                <h4 class="card-title" *ngIf="editmode">Edit Survey</h4>
             </div>
             <div class="card-block">
                 <div class="row">
@@ -74,8 +75,9 @@
                                         <button  class="btn btn-primary" (click)="addNewQuestions()">Add Question</button>
                                     </div>
                                     <div class="text-right mrg-top-15">
-                                        <button (click)="submitForm(myForm.value)" class="btn btn-success">Submit</button>
-                                        <button class="btn btn-default">Clear</button>
+                                        <button (click)="submitForm(myForm.value)" class="btn btn-success" *ngIf="!editmode">Submit</button>
+                                        <button (click)="saveForm(myForm.value)" class="btn btn-success" *ngIf="editmode">Save</button>
+                    
                                     </div>
                                 </div>
                             </div>

@@ -7,8 +7,10 @@ export class GlobalMethods {
     register_url: string = this.host_url + "users/register";
     login_url: string = this.host_url + "users/login";
     addsurvey_url: string = this.host_url + "survey/add";
+    editsurvey_url: string = this.host_url + "survey/update";
     updatesurvey_url: string = this.host_url + "survey/update";
     getsurvey_url: string = this.host_url + "survey/";
+    getallsurves_url: string =this.host_url+"survey/all";
 
    
     constructor(private http: HttpClient) {

@@ -14,14 +14,16 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   constructor(private element: ElementRef,private _location: Location,private router: Router, formbuilder: FormBuilder ,private gbmethods : GlobalMethods) { 
     this.loginForm = formbuilder.group({
-      'email': "",
+      'emailid': "",
       'pass': ""
     });
     this.gbmethods=gbmethods;
   }
 
   ngOnInit() {
-    if (localStorage.getItem('user_id') != undefined || localStorage.getItem('user_id') != "undefined") {
+    if (localStorage.getItem('user_id') == undefined || localStorage.getItem('user_id') == "undefined" || localStorage.getItem('user_id') =="" ) {
+     
+    }else{
       this.router.navigateByUrl('home');
     }
   }
@@ -33,7 +35,8 @@ export class LoginComponent implements OnInit {
             if(res.statuscode==0){
               localStorage.setItem('user_id', res.user._id);
               localStorage.setItem('name', res.user.name );
-              this._location.back();
+              //this._location.back();
+              this.router.navigateByUrl('home');
             }
           }else{
             console.log(res.message);
