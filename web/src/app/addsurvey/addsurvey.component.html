@@ -28,7 +28,7 @@
                                                     <label for="form-questiontype-{{i}}" class="col-md-2 control-label">Question type</label>
                                                     <div class="col-md-10">
                                                         <select  class="form-control" formControlName="qtype" id="form-questiontype-{{i}}">
-                                                            <option *ngFor="let qtypname of qtypes">
+                                                            <option *ngFor="let qtypname of qtypes" value={{qtypname}} [selected]="qtypname == comp.value.qtype">
                                                                 {{qtypname}}
                                                             </option>
                                                         </select>

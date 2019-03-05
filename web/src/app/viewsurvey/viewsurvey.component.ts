@@ -28,8 +28,7 @@ export class ViewsurveyComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.gbmethods.PostData(this.gbmethods.getallsurves_url,{cid : localStorage.getItem('user_id')}).subscribe( Response => {
        let res: any=Response;
-     console.log(Response);
-     this.dataSource=res;
+     this.dataSource = new MatTableDataSource(res);
  
    },
    error => {

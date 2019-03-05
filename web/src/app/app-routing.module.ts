@@ -13,6 +13,9 @@ const routes: Routes = [
 		path: 'add', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
 	},
 	{
+		path: 'profile', loadChildren: './profile/profile.module#ProfileModule',
+	},
+	{
 		path: 'edit', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
 	},
 	{

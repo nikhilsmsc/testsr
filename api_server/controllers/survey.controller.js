@@ -33,10 +33,11 @@ exports.addSurvey = function (req, res,next) {
 };
 exports.updateSurvey = function (req, res,next) {
 	let response;
-	Survey.find({ "_id": mongoose.Types.ObjectId(req.body.id)}, function(err, survey) {
+	Survey.findOne({ "_id": mongoose.Types.ObjectId(req.body.id)}, function(err, survey) {
 			
 		if(!err) {
 			if(survey) {
+				console.log(survey);
 				survey.name		= req.body.name;
 				survey.updatedAt=Date.now();
 				survey.questions=req.body.questions;
@@ -55,8 +56,8 @@ exports.updateSurvey = function (req, res,next) {
 			}else{
 
 				response = { status: true,statuscode : 1, message: "Survey Not exist"};
+				res.json(response);
 			}
-			res.json(response);
 		}else{
 			response = { status: false, message: err.message};
 			res.json(response);
