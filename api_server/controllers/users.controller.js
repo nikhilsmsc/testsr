@@ -73,6 +73,41 @@ exports.Login = function (req, res,next) {
 	});
 		
 };
+exports.updateuser = function (req, res,next) {
+	let response;
+	Users.findOne({ "_id": mongoose.Types.ObjectId(req.body.id)}, function(err, user) {
+			
+		if(!err) {
+			if(user) {
+				console.log(survey);
+				user.name		= req.body.name;
+				user.updatedAt=Date.now();
+				user.number=req.body.number;
+
+				user.branches=req.body.questions;
+				
+				survey.save(function (err,result) {
+					if (err) {
+						response = { status: false, message: err.message};
+						res.json(response);
+						return next(err);
+					}else{
+						response = { status: true, message: "user updated successfully" };
+						response.id= result._id; 
+						res.json(response);
+					}
+				});
+			}else{
+
+				response = { status: true,statuscode : 1, message: "user Not exist"};
+				res.json(response);
+			}
+		}else{
+			response = { status: false, message: err.message};
+			res.json(response);
+		}
+});
+}
 exports.user_details = function (req, res,next) {
     Users.findById(req.params.id, function (err, user) {
         if (err) return next(err);

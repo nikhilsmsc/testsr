@@ -39,6 +39,10 @@ export class AddsurveyComponent implements OnInit {
        this.editmode=true;
       console.log(this.editdata);
       //this.myForm.value.name=this.editdata.name;
+      this.myForm = this.fb.group({
+        name:this.editdata.name,
+        questions: this.fb.array([])
+      })
       let control = <FormArray>this.myForm.controls.questions;
       this.editdata.questions.forEach(x => {
         control.push(this.fb.group({ 

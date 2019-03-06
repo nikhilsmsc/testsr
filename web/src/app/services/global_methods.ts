@@ -6,6 +6,8 @@ export class GlobalMethods {
     host_url: string = "http://localhost:3399/";
     register_url: string = this.host_url + "users/register";
     login_url: string = this.host_url + "users/login";
+    updateuser_url: string = this.host_url + "users/update";
+    getprofile:string =this.host_url+"users";
     addsurvey_url: string = this.host_url + "survey/add";
     editsurvey_url: string = this.host_url + "survey/update";
     updatesurvey_url: string = this.host_url + "survey/update";

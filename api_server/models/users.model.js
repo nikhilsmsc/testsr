@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let branches= new Schema({
 	name		: {type : String },
-	location 	: {type : String }
-});
+	location 	: {type : String },
+	status		: {type : String },
+	status		: {type : String },
+	surveyid	:{type : String },
+},{_id : false});
 let UsersSchema = new Schema({
     name		: {type: String, required: true, max: 100},
     emailid		: {type: String, required: true,unique:true},
