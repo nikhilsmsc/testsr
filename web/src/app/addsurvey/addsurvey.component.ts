@@ -35,7 +35,8 @@ export class AddsurveyComponent implements OnInit {
   ngOnInit() {
      this.editdata=localStorage.getItem('myHiddenData');
      this.editdata=JSON.parse(this.editdata);
-     if(this.editdata!=""){
+     if(this.editdata =="" || this.editdata==null){
+     }else{
        this.editmode=true;
       console.log(this.editdata);
       //this.myForm.value.name=this.editdata.name;

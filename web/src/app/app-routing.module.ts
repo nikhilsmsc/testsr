@@ -19,11 +19,18 @@ const routes: Routes = [
 		path: 'edit', loadChildren: './addsurvey/addsurvey.module#AddsurveyModule',
 	},
 	{
+		path: 'signup', loadChildren: './signup/signup.module#SignupModule',
+	},
+	{
 		path: 'login', component: LoginComponent
 	},
-	// {
-	// 	path: '**', component: LoginComponent
-	// }
+	{
+		path: 'users', loadChildren: './users/users.module#UsersModule'
+   	},
+	{
+	 	path: '**', loadChildren: './dashboard/dashboard.module#DashboardModule'
+	},
+	
 ];
 
 @NgModule({

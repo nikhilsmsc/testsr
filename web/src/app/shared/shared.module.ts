@@ -7,6 +7,7 @@ import { HeaderComponent } from '../header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatSortModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -20,6 +21,7 @@ import { MatPaginatorModule, MatSortModule } from '@angular/material';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    RouterModule
     
 
 
@@ -32,6 +34,7 @@ import { MatPaginatorModule, MatSortModule } from '@angular/material';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    RouterModule
     
 
   ],

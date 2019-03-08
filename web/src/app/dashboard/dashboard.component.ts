@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('user_id') == undefined || localStorage.getItem('user_id') == "undefined" || localStorage.getItem('user_id') =="" ) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('login');
     }
   }
 

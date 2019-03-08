@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 exports.user_create = function (req, res,next) {
     let response;
-    Cusers.findOne({number: req.body.number}, function(err, cuser) {
+    Cusers.findOne({number: req.body.number , uid : req.body.uid}, function(err, cuser) {
         if(!err) {
             if(cuser) {
     
@@ -38,4 +38,11 @@ exports.user_create = function (req, res,next) {
         }
 });
     
+};
+
+exports.users = function (req, res,next) {
+    Cusers.find({uid : req.body.uid }, function (err, user) {
+        if (err) return next(err);
+        res.json(user);
+    })
 };
