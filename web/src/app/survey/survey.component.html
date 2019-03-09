@@ -1,0 +1,72 @@
+<form [formGroup]="formGroup">
+<mat-horizontal-stepper #stepper>
+    <mat-step label="Step 1">
+    
+         
+          <h2>Please Take a survey </h2>
+          <div>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+     
+      </mat-step>
+      <div *ngFor="let survey of sdata.questions;let i=index">
+      <mat-step label="Question {{i+2}}">
+          <h3>{{survey.question}}</h3>
+          <mat-form-field *ngIf="survey.qtype=='Drop Down'">
+              <mat-select >
+                <mat-option>None</mat-option>
+              
+                <mat-option value="options.option" *ngFor="let options of survey.options">{{options.option}}</mat-option>
+               
+              </mat-select>
+            </mat-form-field>
+            <mat-radio-group class="radio-group" *ngIf="survey.qtype=='Multiple Choice'">
+                <mat-radio-button class="radio-button"  *ngFor="let options of survey.options" [value]="options.option">
+                  {{options.option}} 
+                </mat-radio-button>
+            </mat-radio-group>
+            <section class="radio-group" *ngIf="survey.qtype=='Check Boxes'">
+                <mat-checkbox class="radio-button" *ngFor="let options of survey.options">
+                  {{options.option}} 
+                </mat-checkbox>
+              </section>
+              <mat-form-field *ngIf="survey.qtype=='Short Text'">
+                <input matInput type="text" >
+             </mat-form-field>
+             <mat-form-field *ngIf="survey.qtype=='Long Text Area'" >
+               <textarea matInput placeholder="Leave a comment" ></textarea>
+             </mat-form-field>
+             <mat-form-field *ngIf="survey.qtype=='Date'">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+             </mat-form-field>
+             <mat-form-field *ngIf="survey.qtype=='Date and Time'">
+              <input matInput type="datetime-local" >
+            </mat-form-field>
+            <section class="radio-group" *ngIf="survey.qtype=='Linear Scale'">
+              <div *ngFor="let options of survey.options">
+                {{options.option}}  <mat-slider  thumbLabel min="1" max="10" step="1" value="4"></mat-slider>
+              </div>
+              </section>
+              <section class="radio-group" *ngIf="survey.qtype=='Rating Grid'">
+                  <star-rating *ngFor="let options of survey.options" labelText="{{options.option}} " labelPosition="left" starType="icon"></star-rating>
+                  <star-rating-control formControlName="myRatingControl"></star-rating-control>
+              </section>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+   
+      </mat-step>
+      </div >
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done. Thank you for taking Survey
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+        
+        </div>
+      </mat-step>
+</mat-horizontal-stepper>
+</form>

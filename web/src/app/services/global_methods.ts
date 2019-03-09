@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 @Injectable()
 export class GlobalMethods {
-    //host_url: string = "http://52.221.249.130:3399/";
-    host_url: string = "http://localhost:3399/";
+    host_url: string = "http://52.221.249.130:3399/";
+    //host_url: string = "http://localhost:3399/";
     register_url: string = this.host_url + "users/register";
     login_url: string = this.host_url + "users/login";
     updateuser_url: string = this.host_url + "users/update";
@@ -14,7 +14,7 @@ export class GlobalMethods {
     addsurvey_url: string = this.host_url + "survey/add";
     editsurvey_url: string = this.host_url + "survey/update";
     updatesurvey_url: string = this.host_url + "survey/update";
-    getsurvey_url: string = this.host_url + "survey/";
+    getsurvey_url: string = this.host_url + "survey";
     getallsurves_url: string =this.host_url+"survey/all";
 
    

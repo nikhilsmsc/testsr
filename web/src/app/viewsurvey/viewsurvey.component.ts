@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ViewsurveyComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'name', 'createdAt', 'action'];
+  displayedColumns: string[] = [ 'name', 'createdAt', 'action', 'view'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -46,6 +46,11 @@ export class ViewsurveyComponent implements OnInit {
     //console.log(element);
     localStorage.setItem("myHiddenData", JSON.stringify(element));
     this.router.navigateByUrl('edit');
+  }
+  viewsurvey(element : any){
+    //console.log(element);
+    localStorage.setItem("viewsurvey", JSON.stringify(element));
+    this.router.navigateByUrl('survey');
   }
   deletesurvey(id :any){
     console.log(id);

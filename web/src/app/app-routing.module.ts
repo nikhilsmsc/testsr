@@ -26,9 +26,12 @@ const routes: Routes = [
 	},
 	{
 		path: 'users', loadChildren: './users/users.module#UsersModule'
+	},
+	{
+		path: 'survey', loadChildren: './survey/survey.module#SurveyModule'
    	},
 	{
-	 	path: '**', loadChildren: './dashboard/dashboard.module#DashboardModule'
+	 	path: '**',loadChildren: './signup/signup.module#SignupModule',
 	},
 	
 ];

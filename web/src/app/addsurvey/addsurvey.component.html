@@ -40,7 +40,7 @@
                                                         <textarea class="form-control" rows="3" id="form-question-{{i}}" formControlName="question"></textarea>
                                                     </div>
                                                 </div>
-                                                <div *ngIf="comp.value.qtype=='Multiple Choice' || comp.value.qtype=='Check Boxes' || comp.value.qtype=='Drop Down' || comp.value.qtype=='Rating Grid'">
+                                                <div *ngIf="comp.value.qtype=='Multiple Choice' || comp.value.qtype=='Check Boxes' || comp.value.qtype=='Drop Down' || comp.value.qtype=='Rating Grid' || comp.value.qtype=='Linear Scale'">
                                                     <div formArrayName="options">
                                                             <div *ngFor="let option of comp.get('options').controls; let j=index">
                     

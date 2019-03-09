@@ -22,6 +22,11 @@ export class SignupComponent implements OnInit {
    }
 
   ngOnInit() {
+    if (localStorage.getItem('user_id') == undefined || localStorage.getItem('user_id') == "undefined" || localStorage.getItem('user_id') =="" ) {
+     
+    }else{
+      this.router.navigateByUrl('home');
+    }
   }
   submitForm(data:any){
 

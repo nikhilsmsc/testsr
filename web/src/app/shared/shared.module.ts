@@ -1,13 +1,12 @@
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { GlobalMethods } from '../services/global_methods';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule, MatSortModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from './Material.module';
+import {StarRatingModule} from 'angular-star-rating';
 
 
 
@@ -18,10 +17,9 @@ import { RouterModule } from '@angular/router';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    RouterModule
+    MaterialModule,
+    RouterModule,
+    StarRatingModule.forRoot()
     
 
 
@@ -31,10 +29,9 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    RouterModule
+    MaterialModule,
+    RouterModule,
+    StarRatingModule
     
 
   ],
