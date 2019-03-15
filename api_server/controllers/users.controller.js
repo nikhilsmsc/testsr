@@ -79,14 +79,14 @@ exports.updateuser = function (req, res,next) {
 			
 		if(!err) {
 			if(user) {
-				console.log(survey);
+				
 				user.name		= req.body.name;
 				user.updatedAt=Date.now();
 				user.number=req.body.number;
 
-				user.branches=req.body.questions;
+				user.branches=req.body.branches;
 				
-				survey.save(function (err,result) {
+				user.save(function (err,result) {
 					if (err) {
 						response = { status: false, message: err.message};
 						res.json(response);

@@ -75,9 +75,16 @@ export class ProfileComponent implements OnInit {
     control.removeAt(index)
   }
   submit(data:any){
+    data.id=localStorage.getItem('user_id');
+    console.log(data)
     this.gbmethods.PostData(this.gbmethods.updateuser_url,data).subscribe( Response => {
       let res: any=Response;
-    this.surveyids = res;
+    if(res.status==true){
+      console.log('test');
+      this.router.navigateByUrl('profile');
+    }else{
+      alert('profile not updated');
+    }
 
   },
   error => {
