@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormArray} from '@angular/forms';
 import { GlobalMethods } from '../services/global_methods';
 
 @Component({
@@ -12,8 +12,8 @@ export class SurveyComponent implements OnInit {
   sdata:any={}
   constructor(private fb : FormBuilder ,private gbmethods : GlobalMethods) {
     this.formGroup = this.fb.group({
-      firstCtrl: ['', Validators.required],
-      secondCtrl: ['', Validators.required]
+      
+      answers: this.fb.array([])
     });
    }
 
@@ -34,6 +34,17 @@ export class SurveyComponent implements OnInit {
 
     this.sdata=localStorage.getItem('viewsurvey');
     this.sdata=JSON.parse(this.sdata);
+    console.log(this.sdata);
+    let control = <FormArray>this.formGroup.controls.answers;
+      this.sdata.questions.forEach(x => {
+        control.push(this.fb.group({ 
+          question: x.question,
+          answer : ['']
+         }))
+      })
+  }
+  sub(data:any){
+    console.log(data);
   }
 
 

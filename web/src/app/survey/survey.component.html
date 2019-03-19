@@ -9,40 +9,43 @@
           </div>
      
       </mat-step>
+      <div formArrayName="answers">
       <div *ngFor="let survey of sdata.questions;let i=index">
+          <div [formGroupName]="i">
       <mat-step label="Question {{i+2}}">
+        <input type="hidden" value="{{survey.question}}" formControlName="question">
           <h3>{{survey.question}}</h3>
           <mat-form-field *ngIf="survey.qtype=='Drop Down'">
               <mat-select >
                 <mat-option>None</mat-option>
               
-                <mat-option value="options.option" *ngFor="let options of survey.options">{{options.option}}</mat-option>
+                <mat-option value="options.option" *ngFor="let options of survey.options" formControlName="answer" >{{options.option}}</mat-option>
                
               </mat-select>
             </mat-form-field>
-            <mat-radio-group class="radio-group" *ngIf="survey.qtype=='Multiple Choice'">
+            <mat-radio-group class="radio-group" *ngIf="survey.qtype=='Multiple Choice'" formControlName="answer" >
                 <mat-radio-button class="radio-button"  *ngFor="let options of survey.options" [value]="options.option">
                   {{options.option}} 
                 </mat-radio-button>
             </mat-radio-group>
-            <section class="radio-group" *ngIf="survey.qtype=='Check Boxes'">
+            <section class="radio-group" *ngIf="survey.qtype=='Check Boxes'" formControlName="answer">
                 <mat-checkbox class="radio-button" *ngFor="let options of survey.options">
                   {{options.option}} 
                 </mat-checkbox>
               </section>
               <mat-form-field *ngIf="survey.qtype=='Short Text'">
-                <input matInput type="text" >
+                <input matInput type="text" formControlName="answer">
              </mat-form-field>
              <mat-form-field *ngIf="survey.qtype=='Long Text Area'" >
-               <textarea matInput placeholder="Leave a comment" ></textarea>
+               <textarea matInput placeholder="Leave a comment" formControlName="answer" ></textarea>
              </mat-form-field>
              <mat-form-field *ngIf="survey.qtype=='Date'">
-                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="answer">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
              </mat-form-field>
              <mat-form-field *ngIf="survey.qtype=='Date and Time'">
-              <input matInput type="datetime-local" >
+              <input matInput type="datetime-local" formControlName="answer">
             </mat-form-field>
             <section class="radio-group" *ngIf="survey.qtype=='Linear Scale'">
               <div *ngFor="let options of survey.options">
@@ -51,7 +54,7 @@
               </section>
               <section class="radio-group" *ngIf="survey.qtype=='Rating Grid'">
                   <star-rating *ngFor="let options of survey.options" labelText="{{options.option}} " labelPosition="left" starType="icon"></star-rating>
-                  <star-rating-control formControlName="myRatingControl"></star-rating-control>
+                  <star-rating-control formControlName="answer"></star-rating-control>
               </section>
           <div>
             <button mat-button matStepperPrevious>Back</button>
@@ -59,10 +62,13 @@
           </div>
    
       </mat-step>
+      </div>
       </div >
+      </div>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         You are now done. Thank you for taking Survey
+        <a (click)="sub(formGroup.value)">click</a>
         <div>
           <button mat-button matStepperPrevious>Back</button>
         
